@@ -35,6 +35,17 @@ matreaderPARC<-function(datnam){
     newdat<-as.data.frame(newdat)  
     names(newdat)<-variables
   } else (print ('more than 2 lengths of variables'))
+  
+  ### this method makes everything a factor, this code makes everything that can be numeric numberic
+  for (ii in 1:nvars){
+    blah<-NULL
+    blah<-as.character(newdat[1,ii])
+    blah<-suppressWarnings(as(blah,"numeric"))
+    if(is.finite(blah)){
+        newdat[,ii]<-as.numeric(as.character(newdat[,ii]))
+    }
+  }  
+  
   return(newdat)
 }
 
